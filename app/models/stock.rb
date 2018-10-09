@@ -10,15 +10,15 @@ class Stock < ApplicationRecord
 		begin
 			looked_up_stock = StockQuote::Stock.quote(ticker_symbol)
 			price = strip_commas(looked_up_stock.latest_price)
-			new(name: looked_up_stock.company_name, ticker: looked_up_stock.symbol, last_price: price)
-		
+			newStock = new(name: looked_up_stock.company_name, ticker: looked_up_stock.symbol, last_price: price)
+			
 		rescue Exception => e
 			return nil
 		end
 	end
-	byebug
+	
 	def self.strip_commas(number)
-		number.gsub(",", "")
+		number.to_s.gsub(",", "")
 	end
 
 end
