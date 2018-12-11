@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 	end
 
 	def my_friends
+		@user = current_user
 		@friendships = current_user.friends
 	end
 
@@ -33,6 +34,12 @@ class UsersController < ApplicationController
 	    end  
 	    redirect_to my_friends_path
 	end
+
+	def show
+		@user = User.find(params[:id])
+		@user_stocks = @user.stocks
+	end
+
 
 end
 
